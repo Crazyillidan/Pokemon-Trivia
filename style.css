@@ -1,0 +1,151 @@
+:root {
+    --poke-red: #EE1515;
+    --poke-white: #F0F0F0;
+    --poke-black: #222224;
+    --poke-yellow: #FFDE00;
+    --poke-blue: #3B4CCA;
+    --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--poke-black);
+    font-family: var(--font-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* Main Container - The "Card" */
+.game-container {
+    background-color: var(--poke-white);
+    width: 100%;
+    max-width: 500px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    border: 4px solid var(--poke-black);
+}
+
+/* Header styled like the top of a Pokéball */
+.header {
+    background-color: var(--poke-red);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    border-bottom: 4px solid var(--poke-black);
+    position: relative;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 0px var(--poke-blue);
+}
+
+/* Form Styling */
+#trivia-form {
+    padding: 30px;
+}
+
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+legend {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--poke-black);
+    margin-bottom: 20px;
+    display: block;
+    width: 100%;
+}
+
+/* Custom Radio Button Styling */
+.option {
+    display: flex;
+    align-items: center;
+    background: #e0e0e0;
+    margin-bottom: 10px;
+    padding: 12px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    border: 2px solid transparent;
+}
+
+.option:hover {
+    background: #d4d4d4;
+    border-color: var(--poke-blue);
+}
+
+/* Hide default radio circle */
+.option input[type="radio"] {
+    display: none;
+}
+
+/* Create custom radio circle */
+.custom-radio {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--poke-black);
+    border-radius: 50%;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+}
+
+/* Inner dot when selected */
+.custom-radio::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: var(--poke-red);
+    border-radius: 50%;
+    display: none;
+}
+
+/* Show dot when input is checked */
+.option input[type="radio"]:checked + .custom-radio::after {
+    display: block;
+}
+
+/* Highlight the whole row when checked */
+.option:has(input:checked) {
+    background-color: #d1d6fa; /* Light blue tint */
+    border-color: var(--poke-blue);
+    font-weight: bold;
+}
+
+/* Submit Button */
+.submit-btn {
+    background-color: var(--poke-yellow);
+    color: var(--poke-black);
+    width: 100%;
+    padding: 15px;
+    border: 3px solid var(--poke-black);
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: box-shadow 0.2s;
+}
+
+.submit-btn:hover {
+    box-shadow: 4px 4px 0px var(--poke-blue);
+    transform: translate(-2px, -2px);
+}
+
+.submit-btn:active {
+    box-shadow: 0 0 0;
+    transform: translate(0, 0);
+}
