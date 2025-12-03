@@ -1,4 +1,6 @@
 
+const getElement = selector => document.querySelector(selector);
+
 const quizData = [
     {
         question: "Who is the final evolution of Bulbasaur?",
@@ -77,71 +79,90 @@ const quizData = [
     }
 ];
 
-let currentQuestionIndex = 0;
-let score = 0;
+document.addEventListener("DOMContentLoaded", () => {
+    
+    let currentQuestionIndex = 0;
+    let score = 0;
 
-const form = document.getElementById('trivia-form');
-const questionLegend = document.querySelector('legend');
-const optionGroup = document.querySelector('.option-group');
-const submitBtn = document.querySelector('.submit-btn');
+    const form = getElement('#trivia-form');
+    const questionLegend = getElement('legend');
+    const optionGroup = getElement('.option-group');
+    const submitBtn = getElement('.submit-btn');
 
-function loadQuestion() {
-    const currentQuizData = quizData[currentQuestionIndex];
+    const shuffleArray = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    };
 
-    questionLegend.innerText = `Question ${currentQuestionIndex + 1}: ${currentQuizData.question}`;
+    shuffleArray(quizData);
 
-    optionGroup.innerHTML = '';
+    const loadQuestion = () => {
+        const currentQuizData = quizData[currentQuestionIndex];
 
-    currentQuizData.options.forEach(optionText => {
-        const label = document.createElement('label');
-        label.classList.add('option');
+        questionLegend.innerText = `Question ${currentQuestionIndex + 1}: ${currentQuizData.question}`;
+        optionGroup.innerHTML = '';
 
-        const input = document.createElement('input');
-        input.type = 'radio';
-        input.name = 'answer';
-        input.value = optionText;
+        currentQuizData.options.forEach(optionText => {
+            const label = document.createElement('label');
+            label.classList.add('option');
 
-        const span = document.createElement('span');
-        span.classList.add('custom-radio');
+            const input = document.createElement('input');
+            input.type = 'radio';
+            input.name = 'answer';
+            input.value = optionText;
 
-        label.appendChild(input);
-        label.appendChild(span);
-        label.appendChild(document.createTextNode(optionText));
+            const span = document.createElement('span');
+            span.classList.add('custom-radio');
 
-        optionGroup.appendChild(label);
-    });
-}
+            label.appendChild(input);
+            label.appendChild(span);
+            label.appendChild(document.createTextNode(optionText));
 
-function checkAnswer(e) {
-    e.preventDefault();
+            optionGroup.appendChild(label);
+        });
+    };
 
-    const selectedOption = document.querySelector('input[name="answer"]:checked');
+    const checkAnswer = (e) => {
+        e.preventDefault();
 
-    if (!selectedOption) {
-        alert("Please select an answer, Trainer!");
-        return;
-    }
+        const selectedOption = getElement('input[name="answer"]:checked');
 
-    const userAnswer = selectedOption.value;
-    const correctAnswer = quizData[currentQuestionIndex].correct;
+        if (!selectedOption) {
+            alert("Please select an answer, Trainer!");
+            return;
+        }
 
-    if (userAnswer === correctAnswer) {
-        score++;
-        alert("It's Super Effective! (Correct)");
-    } else {
-        alert(`Not very effective... The correct answer was ${correctAnswer}`);
-    }
+        const userAnswer = selectedOption.value;
+        const correctAnswer = quizData[currentQuestionIndex].correct;
 
-    currentQuestionIndex++;
+        if (userAnswer === correctAnswer) {
+            score++;
+            alert("It's Super Effective! (Correct)");
+        } else {
+            alert(`Not very effective... The correct answer was ${correctAnswer}`);
+        }
 
-    if (currentQuestionIndex < quizData.length) {
-        loadQuestion();
-    } else {
-        questionLegend.innerText = `Game Over! You caught ${score} out of ${quizData.length} correct.`;
-        optionGroup.innerHTML = `<button class="submit-btn" onclick="location.reload()">Play Again</button>`;
-        submitBtn.style.display = 'none';
-    }
-}
+        currentQuestionIndex++;
 
-loadQuestion();
-form.addEventListener('submit', checkAnswer);
+        if (currentQuestionIndex < quizData.length) {
+            loadQuestion();
+        } else {
+            questionLegend.innerText = `Game Over! You caught ${score} out of ${quizData.length} correct.`;
+            
+            optionGroup.innerHTML = '';
+            
+            const reloadBtn = document.createElement('button');
+            reloadBtn.innerText = "Play Again";
+            reloadBtn.classList.add('submit-btn');
+            reloadBtn.addEventListener('click', () => location.reload());
+            
+            optionGroup.appendChild(reloadBtn);
+            submitBtn.style.display = 'none';
+        }
+    };
+
+    loadQuestion();
+    form.addEventListener('submit', checkAnswer);
+});
