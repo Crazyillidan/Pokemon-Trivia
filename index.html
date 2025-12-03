@@ -8,7 +8,19 @@
 </head>
 <body>
 
-    <div class="game-container">
+    <div class="game-container" id="start-screen">
+        <header class="header">
+            <h1>PokéTrivia</h1>
+        </header>
+        <div style="padding: 30px; text-align: center;">
+            <p>Welcome, Trainer!</p>
+            <p>Test your knowledge!</p>
+            <p><em>(Questions are randomized every time!)</em></p>
+            <button id="start-btn" class="submit-btn">Start Game</button>
+        </div>
+    </div>
+
+    <div class="game-container hidden" id="game-container">
         <header class="header">
             <h1>PokéTrivia</h1>
         </header>

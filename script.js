@@ -84,10 +84,14 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentQuestionIndex = 0;
     let score = 0;
 
+    const startScreen = getElement('#start-screen');
+    const gameContainer = getElement('#game-container');
+    const startBtn = getElement('#start-btn');
+    
     const form = getElement('#trivia-form');
     const questionLegend = getElement('legend');
     const optionGroup = getElement('.option-group');
-    const submitBtn = getElement('.submit-btn');
+    const submitBtn = getElement('.submit-btn'); 
 
     const shuffleArray = (array) => {
         for (let i = array.length - 1; i > 0; i--) {
@@ -96,11 +100,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    shuffleArray(quizData);
-
     const loadQuestion = () => {
         const currentQuizData = quizData[currentQuestionIndex];
-
         questionLegend.innerText = `Question ${currentQuestionIndex + 1}: ${currentQuizData.question}`;
         optionGroup.innerHTML = '';
 
@@ -150,7 +151,6 @@ document.addEventListener("DOMContentLoaded", () => {
             loadQuestion();
         } else {
             questionLegend.innerText = `Game Over! You caught ${score} out of ${quizData.length} correct.`;
-            
             optionGroup.innerHTML = '';
             
             const reloadBtn = document.createElement('button');
@@ -159,10 +159,21 @@ document.addEventListener("DOMContentLoaded", () => {
             reloadBtn.addEventListener('click', () => location.reload());
             
             optionGroup.appendChild(reloadBtn);
-            submitBtn.style.display = 'none';
+            
+            form.querySelector('button[type="submit"]').style.display = 'none';
         }
     };
 
-    loadQuestion();
+   
+    startBtn.addEventListener('click', () => {
+        shuffleArray(quizData);
+
+        startScreen.classList.add('hidden');
+        gameContainer.classList.remove('hidden');
+        loadQuestion();
+
+    });
+    
     form.addEventListener('submit', checkAnswer);
+
 });
