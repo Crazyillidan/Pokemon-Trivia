@@ -1,0 +1,53 @@
+{
+    "easy": [
+        { "question": "Which Pokémon is #001 in the Pokédex?", "options": ["Bulbasaur", "Mew", "Pikachu", "Arceus"], "correct": "Bulbasaur" },
+        { "question": "What is the primary type of Pikachu?", "options": ["Fire", "Electric", "Water", "Grass"], "correct": "Electric" },
+        { "question": "Which Pokémon evolves into Charizard?", "options": ["Charmander", "Charmeleon", "Cyndaquil", "Magmar"], "correct": "Charmeleon" },
+        { "question": "What item is used to catch Pokémon?", "options": ["Great Ball", "Potion", "Revive", "Berry"], "correct": "Great Ball" },
+        { "question": "Which region do the games Red and Blue take place in?", "options": ["Johto", "Kanto", "Hoenn", "Galar"], "correct": "Kanto" },
+        { "question": "Which Pokémon is known for saying 'Pika Pika'?", "options": ["Pikachu", "Raichu", "Pichu", "Mimikyu"], "correct": "Pikachu" },
+        { "question": "What type is Squirtle?", "options": ["Grass", "Fire", "Water", "Bug"], "correct": "Water" },
+        { "question": "Which team is the villain in the first generation?", "options": ["Team Magma", "Team Rocket", "Team Galactic", "Team Skull"], "correct": "Team Rocket" },
+        { "question": "How many legs does a Butterfree have?", "options": ["2", "4", "6", "8"], "correct": "6" },
+        { "question": "Which Pokémon is a sleeping giant blocking the road?", "options": ["Snorlax", "Onix", "Geodude", "Gyarados"], "correct": "Snorlax" },
+        { "question": "What evolves from Caterpie?", "options": ["Metapod", "Kakuna", "Weedle", "Pidgey"], "correct": "Metapod" },
+        { "question": "Which of these is a Grass-type?", "options": ["Oddish", "Vulpix", "Seel", "Geodude"], "correct": "Oddish" },
+        { "question": "Who is Ash Ketchum's first Pokémon?", "options": ["Bulbasaur", "Squirtle", "Charmander", "Pikachu"], "correct": "Pikachu" },
+        { "question": "Which Pokémon looks like a Poké Ball?", "options": ["Voltorb", "Magnemite", "Koffing", "Jigglypuff"], "correct": "Voltorb" },
+        { "question": "What color is a shiny Gyarados?", "options": ["Blue", "Gold", "Red", "Green"], "correct": "Red" }
+    ],
+    "normal": [
+        { "question": "Which Eevee evolution is a Fire-type?", "options": ["Vaporeon", "Jolteon", "Flareon", "Umbreon"], "correct": "Flareon" },
+        { "question": "What level does Magikarp evolve?", "options": ["18", "20", "22", "25"], "correct": "20" },
+        { "question": "Which Pokémon is the 'Genetic Pokémon' created by humans?", "options": ["Mew", "Mewtwo", "Ditto", "Porygon"], "correct": "Mewtwo" },
+        { "question": "Which badge is earned in Pewter City?", "options": ["Boulder Badge", "Cascade Badge", "Thunder Badge", "Soul Badge"], "correct": "Boulder Badge" },
+        { "question": "Which type is immune to Ground-type attacks?", "options": ["Flying", "Electric", "Steel", "Rock"], "correct": "Flying" },
+        { "question": "What stone evolves Clefairy into Clefable?", "options": ["Sun Stone", "Moon Stone", "Fire Stone", "Leaf Stone"], "correct": "Moon Stone" },
+        { "question": "Who is the Gym Leader of Cerulean City?", "options": ["Brock", "Misty", "Lt. Surge", "Erika"], "correct": "Misty" },
+        { "question": "Which Pokémon can transform into any other Pokémon?", "options": ["Mew", "Ditto", "Porygon", "Smeargle"], "correct": "Ditto" },
+        { "question": "Which Berry cures status conditions like paralysis?", "options": ["Oran", "Cheri", "Sitrus", "Pecha"], "correct": "Cheri" },
+        { "question": "Which of these is a pseudo-legendary Pokémon?", "options": ["Dragonite", "Charizard", "Lapras", "Arcanine"], "correct": "Dragonite" },
+        { "question": "What is the weakness of the Psychic type?", "options": ["Fighting", "Psychic", "Bug", "Dragon"], "correct": "Bug" },
+        { "question": "Which Fossil Pokémon comes from the Helix Fossil?", "options": ["Omanyte", "Kabuto", "Aerodactyl", "Lileep"], "correct": "Omanyte" },
+        { "question": "Which Pokémon is known as the 'Balloon Pokémon'?", "options": ["Jigglypuff", "Wigglytuff", "Drifloon", "Qwilfish"], "correct": "Jigglypuff" },
+        { "question": "In Generation 1, which type was Physical?", "options": ["Fire", "Water", "Ghost", "Dragon"], "correct": "Ghost" },
+        { "question": "How many Gym Badges do you need to face the Elite Four?", "options": ["6", "7", "8", "10"], "correct": "8" }
+    ],
+    "hard": [
+        { "question": "What is the base power of the move 'Hyper Beam' in Gen 1?", "options": ["120", "150", "100", "200"], "correct": "150" },
+        { "question": "Which Pokémon has the ability 'Wonder Guard'?", "options": ["Sableye", "Spiritomb", "Shedinja", "Ninjask"], "correct": "Shedinja" },
+        { "question": "Which specific item is required to evolve Porygon into Porygon2?", "options": ["Up-Grade", "Dubious Disc", "Link Cable", "Metal Coat"], "correct": "Up-Grade" },
+        { "question": "What was the first Pokémon ever designed?", "options": ["Pikachu", "Bulbasaur", "Rhydon", "Arceus"], "correct": "Rhydon" },
+        { "question": "In Gen 1, which Type was incorrectly immune to Ghost?", "options": ["Normal", "Psychic", "Fighting", "Bug"], "correct": "Psychic" },
+        { "question": "Which Pokémon has the highest base HP stat?", "options": ["Wailord", "Snorlax", "Chansey", "Blissey"], "correct": "Blissey" },
+        { "question": "Which move always results in a critical hit?", "options": ["Slash", "Frost Breath", "Razor Leaf", "Karate Chop"], "correct": "Frost Breath" },
+        { "question": "What is the maximum EV (Effort Value) for a single stat in modern gens?", "options": ["255", "252", "510", "200"], "correct": "252" },
+        { "question": "Which Pokémon is missing MissingNo. most likely a glitch of?", "options": ["Kangaskhan", "Rhydon", "Mew", "Nidoran"], "correct": "Rhydon" },
+        { "question": "Which Pokémon is the only one (other than Ditto) that learns 'Transform' by leveling up?", "options": ["Mew", "Zoroark", "Smeargle", "Arceus"], "correct": "Mew" },
+        { "question": "Who is the champion of the Sinnoh region?", "options": ["Steven", "Wallace", "Cynthia", "Lance"], "correct": "Cynthia" },
+        { "question": "Which Pokémon evolves based on the console orientation?", "options": ["Inkay", "Beldum", "Klink", "Voltorb"], "correct": "Inkay" },
+        { "question": "Which berry raises a stat when HP is low?", "options": ["Sitrus", "Lum", "Salac", "Leppa"], "correct": "Salac" },
+        { "question": "What is the effect of the move 'Splash'?", "options": ["Water Damage", "No Effect", "Heals User", "Lowers Defense"], "correct": "No Effect" },
+        { "question": "Which Pokémon was created by Team Plasma?", "options": ["Mewtwo", "Genesect", "Type: Null", "Castform"], "correct": "Genesect" }
+    ]
+}

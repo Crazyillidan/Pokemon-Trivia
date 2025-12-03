@@ -1,100 +1,41 @@
 
 const getElement = selector => document.querySelector(selector);
 
-const quizData = [
-    {
-        question: "Who is the final evolution of Bulbasaur?",
-        options: ["Ivysaur", "Venusaur", "Charizard", "Butterfree"],
-        correct: "Venusaur"
-    },
-    {
-        question: "Which type is super effective against Water?",
-        options: ["Fire", "Ground", "Electric", "Ice"],
-        correct: "Electric"
-    },
-    {
-        question: "What item is used to catch Pokémon?",
-        options: ["Potion", "Poké Ball", "Antidote", "Repel"],
-        correct: "Poké Ball"
-    },
-    {
-        question: "Which Pokémon is known as the 'Mouse Pokémon'?",
-        options: ["Pikachu", "Rattata", "Sandshrew", "Meowth"],
-        correct: "Pikachu"
-    },
-    {
-        question: "How many evolutions does Eevee currently have?",
-        options: ["3", "5", "8", "10"],
-        correct: "8"
-    },
-    {
-        question: "Who is the legendary Pokémon of Time?",
-        options: ["Palkia", "Dialga", "Giratina", "Arceus"],
-        correct: "Dialga"
-    },
-    {
-        question: "Which of these is NOT a Fire-type Pokémon?",
-        options: ["Charmander", "Ponyta", "Vulpix", "Squirtle"],
-        correct: "Squirtle"
-    },
-    {
-        question: "What is the name of the region in the first generation games?",
-        options: ["Johto", "Hoenn", "Kanto", "Sinnoh"],
-        correct: "Kanto"
-    },
-    {
-        question: "Which Pokémon is famous for sleeping and blocking paths?",
-        options: ["Snorlax", "Slowpoke", "Psyduck", "Slaking"],
-        correct: "Snorlax"
-    },
-    {
-        question: "What level does Magikarp evolve into Gyarados?",
-        options: ["15", "20", "25", "30"],
-        correct: "20"
-    },
-    {
-        question: "Which berry cures paralysis?",
-        options: ["Oran Berry", "Cheri Berry", "Pecha Berry", "Rawst Berry"],
-        correct: "Cheri Berry"
-    },
-    {
-        question: "Who is the leader of Team Rocket?",
-        options: ["James", "Giovanni", "Jessie", "Cyrus"],
-        correct: "Giovanni"
-    },
-    {
-        question: "Which Pokémon is #001 in the National Pokédex?",
-        options: ["Pikachu", "Bulbasaur", "Mew", "Arceus"],
-        correct: "Bulbasaur"
-    },
-    {
-        question: "What type is immune to Ghost-type moves?",
-        options: ["Normal", "Dark", "Psychic", "Fighting"],
-        correct: "Normal"
-    },
-    {
-        question: "Which fossil Pokémon is resurrected from the Helix Fossil?",
-        options: ["Kabuto", "Aerodactyl", "Omanyte", "Lileep"],
-        correct: "Omanyte"
-    }
-];
+let quizData = {};
 
 document.addEventListener("DOMContentLoaded", () => {
     
     let currentQuestionIndex = 0;
     let score = 0;
-    let isWaiting = false; 
+    let isWaiting = false;
+    let currentQuestions = []; 
 
     const startScreen = getElement('#start-screen');
     const gameContainer = getElement('#game-container');
-    const startBtn = getElement('#start-btn');
-    
     const form = getElement('#trivia-form');
     const questionLegend = getElement('legend');
     const optionGroup = getElement('.option-group');
     const submitBtn = getElement('.submit-btn');
-    
     const feedbackEl = getElement('#feedback-message');
+    const diffButtons = document.querySelectorAll('.diff-btn');
+
+    fetch('questions.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("HTTP error " + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            quizData = data; 
+            console.log("Questions loaded successfully!", quizData);
+        })
+        .catch(error => {
+            console.error("Could not load questions:", error);
+            document.querySelector('.difficulty-group').innerHTML = 
+                `<p style="color:red">Error loading questions. Please ensure you are running a Local Server.</p>`;
+        });
+
 
     const shuffleArray = (array) => {
         for (let i = array.length - 1; i > 0; i--) {
@@ -104,12 +45,11 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const loadQuestion = () => {
-        const currentQuizData = quizData[currentQuestionIndex];
+        const currentQuizData = currentQuestions[currentQuestionIndex];
         questionLegend.innerText = `Question ${currentQuestionIndex + 1}: ${currentQuizData.question}`;
         optionGroup.innerHTML = '';
-        
         feedbackEl.textContent = ''; 
-        feedbackEl.className = 'feedback-text'; 
+        feedbackEl.className = 'feedback-text';
 
         currentQuizData.options.forEach(optionText => {
             const label = document.createElement('label');
@@ -133,7 +73,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const checkAnswer = (e) => {
         e.preventDefault();
-
         if (isWaiting) return;
 
         const selectedOption = getElement('input[name="answer"]:checked');
@@ -145,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const userAnswer = selectedOption.value;
-        const correctAnswer = quizData[currentQuestionIndex].correct;
+        const correctAnswer = currentQuestions[currentQuestionIndex].correct;
 
         isWaiting = true;
 
@@ -162,15 +101,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setTimeout(() => {
             currentQuestionIndex++;
-            isWaiting = false; 
-            submitBtn.disabled = false; 
+            isWaiting = false;
+            submitBtn.disabled = false;
 
-            if (currentQuestionIndex < quizData.length) {
+            if (currentQuestionIndex < currentQuestions.length) {
                 loadQuestion();
             } else {
-                questionLegend.innerText = `Game Over! You caught ${score} out of ${quizData.length} correct.`;
+                questionLegend.innerText = `Game Over! You caught ${score} out of ${currentQuestions.length} correct.`;
                 optionGroup.innerHTML = '';
-                feedbackEl.textContent = ''; 
+                feedbackEl.textContent = '';
                 
                 const reloadBtn = document.createElement('button');
                 reloadBtn.innerText = "Play Again";
@@ -183,13 +122,22 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 1500); 
     };
 
-    startBtn.addEventListener('click', () => {
-        shuffleArray(quizData);
-        startScreen.classList.add('hidden');
-        gameContainer.classList.remove('hidden');
-        loadQuestion();
+    diffButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            if (Object.keys(quizData).length === 0) {
+                alert("Data is still loading or failed to load. Please wait a moment.");
+                return;
+            }
+
+            const difficulty = e.target.getAttribute('data-diff');
+            currentQuestions = quizData[difficulty];
+            shuffleArray(currentQuestions);
+            
+            startScreen.classList.add('hidden');
+            gameContainer.classList.remove('hidden');
+            loadQuestion();
+        });
     });
 
     form.addEventListener('submit', checkAnswer);
-
 });
