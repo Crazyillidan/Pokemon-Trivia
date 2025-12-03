@@ -191,4 +191,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     form.addEventListener('submit', checkAnswer);
+
 });
