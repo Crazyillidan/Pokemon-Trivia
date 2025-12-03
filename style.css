@@ -160,3 +160,14 @@ legend {
     box-shadow: 0 0 0;
     transform: translate(0, 0);
 }
+
+/* UTILITY CLASS TO HIDE SECTIONS */
+.hidden {
+    display: none !important;
+}
+
+#start-screen p {
+    font-size: 1.2rem;
+    color: var(--poke-black);
+    margin-bottom: 20px;
+}
