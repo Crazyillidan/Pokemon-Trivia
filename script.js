@@ -83,6 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     let currentQuestionIndex = 0;
     let score = 0;
+    let isWaiting = false; 
 
     const startScreen = getElement('#start-screen');
     const gameContainer = getElement('#game-container');
@@ -91,7 +92,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = getElement('#trivia-form');
     const questionLegend = getElement('legend');
     const optionGroup = getElement('.option-group');
-    const submitBtn = getElement('.submit-btn'); 
+    const submitBtn = getElement('.submit-btn');
+    
+    const feedbackEl = getElement('#feedback-message');
 
     const shuffleArray = (array) => {
         for (let i = array.length - 1; i > 0; i--) {
@@ -104,6 +107,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const currentQuizData = quizData[currentQuestionIndex];
         questionLegend.innerText = `Question ${currentQuestionIndex + 1}: ${currentQuizData.question}`;
         optionGroup.innerHTML = '';
+        
+        feedbackEl.textContent = ''; 
+        feedbackEl.className = 'feedback-text'; 
 
         currentQuizData.options.forEach(optionText => {
             const label = document.createElement('label');
@@ -128,52 +134,61 @@ document.addEventListener("DOMContentLoaded", () => {
     const checkAnswer = (e) => {
         e.preventDefault();
 
+        if (isWaiting) return;
+
         const selectedOption = getElement('input[name="answer"]:checked');
 
         if (!selectedOption) {
-            alert("Please select an answer, Trainer!");
+            feedbackEl.textContent = "Please select an answer, Trainer!";
+            feedbackEl.classList.add('error-msg');
             return;
         }
 
         const userAnswer = selectedOption.value;
         const correctAnswer = quizData[currentQuestionIndex].correct;
 
+        isWaiting = true;
+
         if (userAnswer === correctAnswer) {
             score++;
-            alert("It's Super Effective! (Correct)");
+            feedbackEl.textContent = "It's Super Effective! (Correct)";
+            feedbackEl.className = 'feedback-text success-msg';
         } else {
-            alert(`Not very effective... The correct answer was ${correctAnswer}`);
+            feedbackEl.textContent = `Not very effective... The answer was ${correctAnswer}`;
+            feedbackEl.className = 'feedback-text error-msg';
         }
 
-        currentQuestionIndex++;
+        submitBtn.disabled = true;
 
-        if (currentQuestionIndex < quizData.length) {
-            loadQuestion();
-        } else {
-            questionLegend.innerText = `Game Over! You caught ${score} out of ${quizData.length} correct.`;
-            optionGroup.innerHTML = '';
-            
-            const reloadBtn = document.createElement('button');
-            reloadBtn.innerText = "Play Again";
-            reloadBtn.classList.add('submit-btn');
-            reloadBtn.addEventListener('click', () => location.reload());
-            
-            optionGroup.appendChild(reloadBtn);
-            
-            form.querySelector('button[type="submit"]').style.display = 'none';
-        }
+        setTimeout(() => {
+            currentQuestionIndex++;
+            isWaiting = false; 
+            submitBtn.disabled = false; 
+
+            if (currentQuestionIndex < quizData.length) {
+                loadQuestion();
+            } else {
+                questionLegend.innerText = `Game Over! You caught ${score} out of ${quizData.length} correct.`;
+                optionGroup.innerHTML = '';
+                feedbackEl.textContent = ''; 
+                
+                const reloadBtn = document.createElement('button');
+                reloadBtn.innerText = "Play Again";
+                reloadBtn.classList.add('submit-btn');
+                reloadBtn.addEventListener('click', () => location.reload());
+                
+                optionGroup.appendChild(reloadBtn);
+                form.querySelector('button[type="submit"]').style.display = 'none';
+            }
+        }, 1500); 
     };
 
-   
     startBtn.addEventListener('click', () => {
         shuffleArray(quizData);
-
         startScreen.classList.add('hidden');
         gameContainer.classList.remove('hidden');
         loadQuestion();
-
     });
-    
-    form.addEventListener('submit', checkAnswer);
 
+    form.addEventListener('submit', checkAnswer);
 });

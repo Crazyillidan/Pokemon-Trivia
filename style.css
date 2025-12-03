@@ -171,3 +171,21 @@ legend {
     color: var(--poke-black);
     margin-bottom: 20px;
 }
+
+.feedback-text {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+    min-height: 1.5rem; 
+    margin-top: 15px;
+    margin-bottom: 5px;
+    transition: opacity 0.3s;
+}
+
+.success-msg {
+    color: #2e7d32; /* Green */
+}
+
+.error-msg {
+    color: #d32f2f; /* Red */
+}
