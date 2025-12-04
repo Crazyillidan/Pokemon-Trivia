@@ -14,7 +14,12 @@
         { "question": "Which of these is a Grass-type?", "options": ["Oddish", "Vulpix", "Seel", "Geodude"], "correct": "Oddish" },
         { "question": "Who is Ash Ketchum's first Pokémon?", "options": ["Bulbasaur", "Squirtle", "Charmander", "Pikachu"], "correct": "Pikachu" },
         { "question": "Which Pokémon looks like a Poké Ball?", "options": ["Voltorb", "Magnemite", "Koffing", "Jigglypuff"], "correct": "Voltorb" },
-        { "question": "What color is a shiny Gyarados?", "options": ["Blue", "Gold", "Red", "Green"], "correct": "Red" }
+        { "question": "What color is a shiny Gyarados?", "options": ["Blue", "Gold", "Red", "Green"], "correct": "Red" },
+        { "question": "What type is Charmander?", "options": ["Water", "Fire", "Grass", "Electric"], "correct": "Fire" },
+        { "question": "How many heads does a Dugtrio have?", "options": ["1", "2", "3", "4"], "correct": "3" },
+        { "question": "Which Pokémon evolves into Butterfree?", "options": ["Metapod", "Kakuna", "Beedrill", "Venonat"], "correct": "Metapod" },
+        { "question": "What is the slogan of the Pokémon franchise?", "options": ["Just Do It", "Gotta Catch 'Em All", "I'm Lovin' It", "Power to the Players"], "correct": "Gotta Catch 'Em All" },
+        { "question": "Which of these is a Water-type Pokémon?", "options": ["Sandshrew", "Psyduck", "Ponyta", "Geodude"], "correct": "Psyduck" }
     ],
     "normal": [
         { "question": "Which Eevee evolution is a Fire-type?", "options": ["Vaporeon", "Jolteon", "Flareon", "Umbreon"], "correct": "Flareon" },
@@ -31,7 +36,12 @@
         { "question": "Which Fossil Pokémon comes from the Helix Fossil?", "options": ["Omanyte", "Kabuto", "Aerodactyl", "Lileep"], "correct": "Omanyte" },
         { "question": "Which Pokémon is known as the 'Balloon Pokémon'?", "options": ["Jigglypuff", "Wigglytuff", "Drifloon", "Qwilfish"], "correct": "Jigglypuff" },
         { "question": "In Generation 1, which type was Physical?", "options": ["Fire", "Water", "Ghost", "Dragon"], "correct": "Ghost" },
-        { "question": "How many Gym Badges do you need to face the Elite Four?", "options": ["6", "7", "8", "10"], "correct": "8" }
+        { "question": "How many Gym Badges do you need to face the Elite Four?", "options": ["6", "7", "8", "10"], "correct": "8" },
+        { "question": "What happens when you use a Rare Candy?", "options": ["Heals HP", "Increases Level", "Cures Poison", "Revives Pokémon"], "correct": "Increases Level" },
+        { "question": "Which type is super effective against Dragon-type Pokémon?", "options": ["Fire", "Water", "Fairy", "Poison"], "correct": "Fairy" },
+        { "question": "Which region features Team Plasma?", "options": ["Kanto", "Unova", "Johto", "Kalos"], "correct": "Unova" },
+        { "question": "What item evolves Scyther into Scizor?", "options": ["Metal Coat", "Kings Rock", "Dragon Scale", "Steel Wing"], "correct": "Metal Coat" },
+        { "question": "Which Pokémon is known as the 'Psi Pokémon'?", "options": ["Psyduck", "Alakazam", "Mewtwo", "Espeon"], "correct": "Alakazam" }
     ],
     "hard": [
         { "question": "What is the base power of the move 'Hyper Beam' in Gen 1?", "options": ["120", "150", "100", "200"], "correct": "150" },
@@ -42,12 +52,17 @@
         { "question": "Which Pokémon has the highest base HP stat?", "options": ["Wailord", "Snorlax", "Chansey", "Blissey"], "correct": "Blissey" },
         { "question": "Which move always results in a critical hit?", "options": ["Slash", "Frost Breath", "Razor Leaf", "Karate Chop"], "correct": "Frost Breath" },
         { "question": "What is the maximum EV (Effort Value) for a single stat in modern gens?", "options": ["255", "252", "510", "200"], "correct": "252" },
-        { "question": "Which Pokémon is missing MissingNo. most likely a glitch of?", "options": ["Kangaskhan", "Rhydon", "Mew", "Nidoran"], "correct": "Rhydon" },
         { "question": "Which Pokémon is the only one (other than Ditto) that learns 'Transform' by leveling up?", "options": ["Mew", "Zoroark", "Smeargle", "Arceus"], "correct": "Mew" },
         { "question": "Who is the champion of the Sinnoh region?", "options": ["Steven", "Wallace", "Cynthia", "Lance"], "correct": "Cynthia" },
         { "question": "Which Pokémon evolves based on the console orientation?", "options": ["Inkay", "Beldum", "Klink", "Voltorb"], "correct": "Inkay" },
         { "question": "Which berry raises a stat when HP is low?", "options": ["Sitrus", "Lum", "Salac", "Leppa"], "correct": "Salac" },
         { "question": "What is the effect of the move 'Splash'?", "options": ["Water Damage", "No Effect", "Heals User", "Lowers Defense"], "correct": "No Effect" },
-        { "question": "Which Pokémon was created by Team Plasma?", "options": ["Mewtwo", "Genesect", "Type: Null", "Castform"], "correct": "Genesect" }
+        { "question": "Which Pokémon was created by Team Plasma?", "options": ["Mewtwo", "Genesect", "Type: Null", "Castform"], "correct": "Genesect" },
+        { "question": "What is the name of the beneficial virus that doubles EV gain?", "options": ["Pokérus", "Poké-Flu", "Strain 25", "Shadow Virus"], "correct": "Pokérus" },
+        { "question": "Which Pokémon evolves into Milotic only when its Beauty is high?", "options": ["Feebas", "Magikarp", "Finneon", "Goldeen"], "correct": "Feebas" },
+        { "question": "Which Pokémon was originally chosen to be the franchise mascot before Pikachu?", "options": ["Eevee", "Clefairy", "Jigglypuff", "Poliwhirl"], "correct": "Clefairy" },
+        { "question": "What is the Base Stat Total (BST) of Arceus?", "options": ["680", "700", "720", "750"], "correct": "720" },
+        { "question": "Which move reverses the turn order (slower Pokémon move first)?", "options": ["Trick Room", "Wonder Room", "Magic Room", "Gravity"], "correct": "Trick Room" },
+        { "question": "What is the base stat total (BST) shared by all Pseudo-Legendary Pokémon?", "options": ["580", "600", "670", "550"], "correct": "600" }
     ]
 }
