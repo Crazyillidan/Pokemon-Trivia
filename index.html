@@ -21,7 +21,48 @@
                 <button class="submit-btn diff-btn" data-diff="normal">Normal</button>
                 <button class="submit-btn diff-btn" data-diff="hard">Hard</button>
             </div>
+
+            <button id="to-creator-btn" class="submit-btn" style="background-color: #9C27B0; margin-top: 20px; color: white;">
+                + Create Question
+            </button>
         </div>
+    </div>
+
+    <div class="game-container hidden" id="creator-screen">
+        <header class="header" style="background-color: #9C27B0;">
+            <h2>New Question</h2>
+        </header>
+        
+        <form id="add-question-form" style="padding: 20px;">
+            <label style="font-weight: bold;">Difficulty:</label>
+            <select id="new-difficulty" class="full-width-input">
+                <option value="easy">Easy</option>
+                <option value="normal">Normal</option>
+                <option value="hard">Hard</option>
+            </select>
+
+            <input type="text" id="new-q" class="full-width-input" placeholder="Type your question here..." required>
+            
+            <div class="options-grid">
+                <input type="text" id="new-opt-1" placeholder="Option 1" required>
+                <input type="text" id="new-opt-2" placeholder="Option 2" required>
+                <input type="text" id="new-opt-3" placeholder="Option 3" required>
+                <input type="text" id="new-opt-4" placeholder="Option 4" required>
+            </div>
+
+            <label style="font-weight: bold;">Which option is correct?</label>
+            <select id="new-correct-index" class="full-width-input">
+                <option value="0">Option 1</option>
+                <option value="1">Option 2</option>
+                <option value="2">Option 3</option>
+                <option value="3">Option 4</option>
+            </select>
+
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button type="button" id="cancel-create-btn" class="submit-btn" style="background-color: #555;">Back</button>
+                <button type="submit" class="submit-btn" style="background-color: #4CAF50;">Save</button>
+            </div>
+        </form>
     </div>
 
     <div class="game-container hidden" id="game-container">
@@ -33,7 +74,6 @@
             <div class="question-card">
                 <fieldset>
                     <legend>Loading Question...</legend>
-                    
                     <div class="option-group">
                         </div>
                 </fieldset>

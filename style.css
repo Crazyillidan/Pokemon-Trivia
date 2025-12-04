@@ -8,15 +8,12 @@
 }
 
 body {
-    /* BACKGROUND IMAGE SETTINGS */
     background-image: url('images/pokemon-picture-wallpaper.jpg');
-    background-size: cover;          /* Scales image to cover entire screen */
-    background-position: center;     /* Centers the image */
-    background-repeat: no-repeat;    /* Prevents tiling */
-    background-attachment: fixed;    /* Keeps background still while scrolling */
-    background-color: var(--poke-black); /* Fallback color if image fails to load */
-
-    /* Layout Settings */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: var(--poke-black);
     font-family: var(--font-main);
     display: flex;
     justify-content: center;
@@ -25,37 +22,40 @@ body {
     margin: 0;
 }
 
-/* Main Container - The "Card" */
+/* MAIN CONTAINER (The Card) */
 .game-container {
     background-color: var(--poke-white);
-    width: 90%;          /* Changed to 90% for better mobile view */
+    width: 90%;
     max-width: 500px;
     border-radius: 15px;
     overflow: hidden;
-    /* Added a stronger shadow to separate it from the busy background */
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8); 
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
     border: 4px solid var(--poke-black);
 }
 
-/* Header styled like the top of a Pokéball */
+/* UTILITY: Hidden Class */
+.hidden {
+    display: none !important;
+}
+
+/* HEADER */
 .header {
     background-color: var(--poke-red);
     color: white;
     text-align: center;
     padding: 20px;
     border-bottom: 4px solid var(--poke-black);
-    position: relative;
+    transition: background-color 0.3s;
 }
 
-.header h1 {
+.header h1, .header h2 {
     margin: 0;
-    font-size: 2rem;
     text-transform: uppercase;
     letter-spacing: 2px;
     text-shadow: 2px 2px 0px var(--poke-blue);
 }
 
-/* Form Styling */
+/* FORM ELEMENTS */
 #trivia-form {
     padding: 30px;
 }
@@ -76,7 +76,7 @@ legend {
     line-height: 1.4;
 }
 
-/* Custom Radio Button Styling */
+/* OPTION BUTTONS */
 .option {
     display: flex;
     align-items: center;
@@ -85,7 +85,7 @@ legend {
     padding: 12px 15px;
     border-radius: 8px;
     cursor: pointer;
-    transition: background 0.2s, transform 0.1s;
+    transition: all 0.2s;
     border: 2px solid transparent;
 }
 
@@ -94,12 +94,11 @@ legend {
     border-color: var(--poke-blue);
 }
 
-/* Hide default radio circle */
+/* Custom Radio Circle */
 .option input[type="radio"] {
     display: none;
 }
 
-/* Create custom radio circle */
 .custom-radio {
     width: 20px;
     height: 20px;
@@ -110,10 +109,9 @@ legend {
     align-items: center;
     justify-content: center;
     background: white;
-    flex-shrink: 0; /* Prevents circle from squishing on small screens */
+    flex-shrink: 0;
 }
 
-/* Inner dot when selected */
 .custom-radio::after {
     content: '';
     width: 10px;
@@ -123,19 +121,17 @@ legend {
     display: none;
 }
 
-/* Show dot when input is checked */
 .option input[type="radio"]:checked + .custom-radio::after {
     display: block;
 }
 
-/* Highlight the whole row when checked */
 .option:has(input:checked) {
-    background-color: #d1d6fa; 
+    background-color: #d1d6fa;
     border-color: var(--poke-blue);
     font-weight: bold;
 }
 
-/* Submit Button */
+/* BUTTONS */
 .submit-btn {
     background-color: var(--poke-yellow);
     color: var(--poke-black);
@@ -147,7 +143,7 @@ legend {
     font-weight: bold;
     text-transform: uppercase;
     cursor: pointer;
-    margin-top: 20px;
+    margin-top: 10px;
     transition: box-shadow 0.2s;
 }
 
@@ -161,43 +157,79 @@ legend {
     transform: translate(0, 0);
 }
 
-/* UTILITY CLASS TO HIDE SECTIONS */
-.hidden {
-    display: none !important;
+/* DIFFICULTY BUTTONS */
+.difficulty-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
 }
 
-#start-screen p {
-    font-size: 1.2rem;
-    color: var(--poke-black);
-    margin-bottom: 20px;
+.diff-btn {
+    margin-top: 0;
+    border: 3px solid var(--poke-black);
+    color: white;
+    text-shadow: 1px 1px 0 #000;
 }
 
+.diff-btn[data-diff="easy"] { background-color: #4CAF50; }
+.diff-btn[data-diff="easy"]:hover { box-shadow: 4px 4px 0 #1b5e20; }
+
+.diff-btn[data-diff="normal"] { background-color: #FF9800; }
+.diff-btn[data-diff="normal"]:hover { box-shadow: 4px 4px 0 #e65100; }
+
+.diff-btn[data-diff="hard"] { background-color: #F44336; }
+.diff-btn[data-diff="hard"]:hover { box-shadow: 4px 4px 0 #b71c1c; }
+
+/* FEEDBACK TEXT */
 .feedback-text {
     text-align: center;
     font-size: 1.1rem;
     font-weight: bold;
-    min-height: 1.5rem; 
+    min-height: 1.5rem;
     margin-top: 15px;
     margin-bottom: 5px;
-    transition: opacity 0.3s;
 }
 
-.success-msg {
-    color: #2e7d32; /* Green */
+.success-msg { color: #2e7d32; }
+.error-msg { color: #d32f2f; }
+
+/* CREATOR SCREEN INPUTS */
+.full-width-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 1rem;
 }
 
-.error-msg {
-    color: #d32f2f; /* Red */
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.options-grid input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-family: inherit;
 }
 
 .theme-great .header {
-    background-color: #2664BE; /* Great Ball Blue */
+    background-color: #2664BE;
 }
 .theme-great .header h1 {
-    text-shadow: 2px 2px 0px #EE1515; /* Red Shadow */
+    text-shadow: 2px 2px 0px #EE1515;
 }
 .theme-great .submit-btn {
-    background-color: #EE1515; /* Red Button */
+    background-color: #EE1515;
     color: white;
 }
 .theme-great .option:hover {
@@ -205,17 +237,17 @@ legend {
 }
 .theme-great .option:has(input:checked) {
     border-color: #2664BE;
-    background-color: #dbeaff; /* Light Blue Tint */
+    background-color: #dbeaff;
 }
 
 .theme-ultra .header {
-    background-color: #333333; /* Ultra Ball Black */
+    background-color: #333333;
 }
 .theme-ultra .header h1 {
-    text-shadow: 2px 2px 0px #FFDE00; /* Yellow Shadow */
+    text-shadow: 2px 2px 0px #FFDE00;
 }
 .theme-ultra .submit-btn {
-    background-color: #FFDE00; /* Yellow Button */
+    background-color: #FFDE00;
     color: #222224;
 }
 .theme-ultra .option:hover {
@@ -223,5 +255,5 @@ legend {
 }
 .theme-ultra .option:has(input:checked) {
     border-color: #FFDE00;
-    background-color: #fff9c4; /* Light Yellow Tint */
+    background-color: #fff9c4;
 }

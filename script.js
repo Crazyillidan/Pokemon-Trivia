@@ -4,7 +4,7 @@ const getElement = selector => document.querySelector(selector);
 let quizData = {};
 
 document.addEventListener("DOMContentLoaded", () => {
-    
+
     let currentQuestionIndex = 0;
     let score = 0;
     let isWaiting = false;
@@ -12,6 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const startScreen = getElement('#start-screen');
     const gameContainer = getElement('#game-container');
+    const creatorScreen = getElement('#creator-screen');
+
     const form = getElement('#trivia-form');
     const questionLegend = getElement('legend');
     const optionGroup = getElement('.option-group');
@@ -19,23 +21,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const feedbackEl = getElement('#feedback-message');
     const diffButtons = document.querySelectorAll('.diff-btn');
 
+    const toCreatorBtn = getElement('#to-creator-btn');
+    const cancelCreateBtn = getElement('#cancel-create-btn');
+    const addForm = getElement('#add-question-form');
+
     fetch('questions.json')
         .then(response => {
-            if (!response.ok) {
-                throw new Error("HTTP error " + response.status);
-            }
+            if (!response.ok) throw new Error("HTTP error " + response.status);
             return response.json();
         })
         .then(data => {
-            quizData = data; 
-            console.log("Questions loaded successfully!", quizData);
+            quizData = data;
+            console.log("Questions loaded:", quizData);
         })
         .catch(error => {
             console.error("Could not load questions:", error);
             document.querySelector('.difficulty-group').innerHTML = 
-                `<p style="color:red">Error loading questions. Please ensure you are running a Local Server.</p>`;
+                `<p style="color:red; background:white; padding:10px; border-radius:5px;">
+                Error loading questions. Ensure you are using a Local Server (VS Code Live Server).
+                </p>`;
         });
-
 
     const shuffleArray = (array) => {
         for (let i = array.length - 1; i > 0; i--) {
@@ -48,6 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const currentQuizData = currentQuestions[currentQuestionIndex];
         questionLegend.innerText = `Question ${currentQuestionIndex + 1}: ${currentQuizData.question}`;
         optionGroup.innerHTML = '';
+        
         feedbackEl.textContent = ''; 
         feedbackEl.className = 'feedback-text';
 
@@ -107,6 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (currentQuestionIndex < currentQuestions.length) {
                 loadQuestion();
             } else {
+
                 questionLegend.innerText = `Game Over! You caught ${score} out of ${currentQuestions.length} correct.`;
                 optionGroup.innerHTML = '';
                 feedbackEl.textContent = '';
@@ -122,20 +129,33 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 1500); 
     };
 
+    toCreatorBtn.addEventListener('click', () => {
+        startScreen.classList.add('hidden');
+        creatorScreen.classList.remove('hidden');
+    });
+
+    cancelCreateBtn.addEventListener('click', () => {
+        creatorScreen.classList.add('hidden');
+        startScreen.classList.remove('hidden');
+        addForm.reset();
+    });
+
     diffButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
             if (Object.keys(quizData).length === 0) {
-                alert("Data is still loading or failed to load. Please wait a moment.");
+                alert("Data is loading... please wait.");
                 return;
             }
 
             const difficulty = e.target.getAttribute('data-diff');
-            const fullPool = quizData[difficulty];
+            const fullPool = [...quizData[difficulty]]; 
             
             shuffleArray(fullPool);
             
             currentQuestions = fullPool.slice(0, 10);
-            
+            currentQuestionIndex = 0;
+            score = 0;
+
             gameContainer.classList.remove('theme-great', 'theme-ultra');
             if (difficulty === 'normal') {
                 gameContainer.classList.add('theme-great');
@@ -145,8 +165,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
             startScreen.classList.add('hidden');
             gameContainer.classList.remove('hidden');
+            
             loadQuestion();
         });
+    });
+
+    addForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const difficulty = getElement('#new-difficulty').value;
+        const questionText = getElement('#new-q').value;
+        const opt1 = getElement('#new-opt-1').value;
+        const opt2 = getElement('#new-opt-2').value;
+        const opt3 = getElement('#new-opt-3').value;
+        const opt4 = getElement('#new-opt-4').value;
+        const correctIndex = getElement('#new-correct-index').value;
+
+        const optionsArray = [opt1, opt2, opt3, opt4];
+        const correctAnswerText = optionsArray[correctIndex];
+
+        const newQuestion = {
+            question: questionText,
+            options: optionsArray,
+            correct: correctAnswerText
+        };
+
+        if (quizData[difficulty]) {
+            quizData[difficulty].push(newQuestion);
+            alert(`Saved to ${difficulty} mode! It will appear in the next game.`);
+            addForm.reset();
+            creatorScreen.classList.add('hidden');
+            startScreen.classList.remove('hidden');
+        } else {
+            alert("Error: Data not loaded.");
+        }
     });
 
     form.addEventListener('submit', checkAnswer);
