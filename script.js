@@ -124,6 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     diffButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
+            
             if (Object.keys(quizData).length === 0) {
                 alert("Data is still loading or failed to load. Please wait a moment.");
                 return;
@@ -132,6 +133,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const difficulty = e.target.getAttribute('data-diff');
             currentQuestions = quizData[difficulty];
             shuffleArray(currentQuestions);
+            
+            gameContainer.classList.remove('theme-great', 'theme-ultra');
+
+            if (difficulty === 'normal') {
+                gameContainer.classList.add('theme-great');
+            } else if (difficulty === 'hard') {
+                gameContainer.classList.add('theme-ultra');
+            }
             
             startScreen.classList.add('hidden');
             gameContainer.classList.remove('hidden');

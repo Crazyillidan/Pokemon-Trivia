@@ -189,3 +189,39 @@ legend {
 .error-msg {
     color: #d32f2f; /* Red */
 }
+
+.theme-great .header {
+    background-color: #2664BE; /* Great Ball Blue */
+}
+.theme-great .header h1 {
+    text-shadow: 2px 2px 0px #EE1515; /* Red Shadow */
+}
+.theme-great .submit-btn {
+    background-color: #EE1515; /* Red Button */
+    color: white;
+}
+.theme-great .option:hover {
+    border-color: #2664BE;
+}
+.theme-great .option:has(input:checked) {
+    border-color: #2664BE;
+    background-color: #dbeaff; /* Light Blue Tint */
+}
+
+.theme-ultra .header {
+    background-color: #333333; /* Ultra Ball Black */
+}
+.theme-ultra .header h1 {
+    text-shadow: 2px 2px 0px #FFDE00; /* Yellow Shadow */
+}
+.theme-ultra .submit-btn {
+    background-color: #FFDE00; /* Yellow Button */
+    color: #222224;
+}
+.theme-ultra .option:hover {
+    border-color: #FFDE00;
+}
+.theme-ultra .option:has(input:checked) {
+    border-color: #FFDE00;
+    background-color: #fff9c4; /* Light Yellow Tint */
+}
