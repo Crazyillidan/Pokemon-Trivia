@@ -257,3 +257,24 @@ legend {
     border-color: #FFDE00;
     background-color: #fff9c4;
 }
+
+.secondary-btn {
+    background: none;
+    border: none;
+    color: #666; 
+    text-decoration: underline;
+    cursor: pointer;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.secondary-btn:hover {
+    color: var(--poke-red); 
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}

@@ -4,7 +4,7 @@ const getElement = selector => document.querySelector(selector);
 let quizData = {};
 
 document.addEventListener("DOMContentLoaded", () => {
-
+    
     let currentQuestionIndex = 0;
     let score = 0;
     let isWaiting = false;
@@ -20,10 +20,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const submitBtn = getElement('.submit-btn');
     const feedbackEl = getElement('#feedback-message');
     const diffButtons = document.querySelectorAll('.diff-btn');
+    const restartBtn = getElement('#restart-btn');
 
     const toCreatorBtn = getElement('#to-creator-btn');
     const cancelCreateBtn = getElement('#cancel-create-btn');
     const addForm = getElement('#add-question-form');
+    const creatorFeedback = getElement('#creator-feedback');
 
     fetch('questions.json')
         .then(response => {
@@ -38,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Could not load questions:", error);
             document.querySelector('.difficulty-group').innerHTML = 
                 `<p style="color:red; background:white; padding:10px; border-radius:5px;">
-                Error loading questions. Ensure you are using a Local Server (VS Code Live Server).
+                Error loading questions. Ensure you are running a Local Server.
                 </p>`;
         });
 
@@ -113,7 +115,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (currentQuestionIndex < currentQuestions.length) {
                 loadQuestion();
             } else {
-
                 questionLegend.innerText = `Game Over! You caught ${score} out of ${currentQuestions.length} correct.`;
                 optionGroup.innerHTML = '';
                 feedbackEl.textContent = '';
@@ -125,20 +126,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 optionGroup.appendChild(reloadBtn);
                 form.querySelector('button[type="submit"]').style.display = 'none';
+                restartBtn.style.display = 'none'; 
             }
         }, 1500); 
     };
-
-    toCreatorBtn.addEventListener('click', () => {
-        startScreen.classList.add('hidden');
-        creatorScreen.classList.remove('hidden');
-    });
-
-    cancelCreateBtn.addEventListener('click', () => {
-        creatorScreen.classList.add('hidden');
-        startScreen.classList.remove('hidden');
-        addForm.reset();
-    });
 
     diffButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -148,11 +139,11 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const difficulty = e.target.getAttribute('data-diff');
-            const fullPool = [...quizData[difficulty]]; 
-            
+            const fullPool = [...quizData[difficulty]];
             shuffleArray(fullPool);
             
             currentQuestions = fullPool.slice(0, 10);
+            
             currentQuestionIndex = 0;
             score = 0;
 
@@ -165,9 +156,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
             startScreen.classList.add('hidden');
             gameContainer.classList.remove('hidden');
+            restartBtn.style.display = 'block'; 
             
             loadQuestion();
         });
+    });
+
+    restartBtn.addEventListener('click', () => {
+        gameContainer.classList.add('hidden');
+        startScreen.classList.remove('hidden');
+
+        gameContainer.classList.remove('theme-great', 'theme-ultra');
+        feedbackEl.textContent = '';
+        feedbackEl.className = 'feedback-text';
+    });
+
+    toCreatorBtn.addEventListener('click', () => {
+        startScreen.classList.add('hidden');
+        creatorScreen.classList.remove('hidden');
+    });
+
+    cancelCreateBtn.addEventListener('click', () => {
+        creatorScreen.classList.add('hidden');
+        startScreen.classList.remove('hidden');
+        addForm.reset();
+        creatorFeedback.textContent = '';
     });
 
     addForm.addEventListener('submit', (e) => {
@@ -192,12 +205,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (quizData[difficulty]) {
             quizData[difficulty].push(newQuestion);
-            alert(`Saved to ${difficulty} mode! It will appear in the next game.`);
-            addForm.reset();
-            creatorScreen.classList.add('hidden');
-            startScreen.classList.remove('hidden');
+            
+            creatorFeedback.textContent = `Saved to ${difficulty} mode!`;
+            creatorFeedback.className = 'feedback-text success-msg';
+            
+            setTimeout(() => {
+                addForm.reset();
+                creatorFeedback.textContent = '';
+                creatorFeedback.className = 'feedback-text';
+                
+                creatorScreen.classList.add('hidden');
+                startScreen.classList.remove('hidden');
+            }, 1500);
+
         } else {
-            alert("Error: Data not loaded.");
+            creatorFeedback.textContent = "Error: Data not loaded.";
+            creatorFeedback.className = 'feedback-text error-msg';
         }
     });
 
